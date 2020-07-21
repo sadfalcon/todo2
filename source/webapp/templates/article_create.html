@@ -5,13 +5,22 @@
     <title>Create</title>
 </head>
 <body>
-<h1>Create Article</h1>
+<h1>Create task</h1>
+<p><a href="/">На главную</a></p>
 <form action="/articles/add/" method="post">
     {% csrf_token %}
-
-    <label>Text:</label><br/>
-    <textarea name="content"></textarea><br/>
+    <label>Description:</label><br/>
+    <textarea name="description"></textarea><br/>
     <br/>
+    <label>Status:</label><br/>
+<select  name="status">
+    <option disabled>Выберите</option>
+    <option value="In_progress">В процессе</option>
+    <option selected value="New">Новая</option>
+     <option value="Done">Сделано</option>
+   </select><br/><br/>
+    <label>Date end:</label><br/>
+<input type="text" name="date_end">
     <input type="submit" value="Send"/>
 </form>
 </body>
