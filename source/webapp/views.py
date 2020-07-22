@@ -15,10 +15,11 @@ def article_create_view(request):
         description = request.POST.get('description')
         status = request.POST.get('status')
         date_end = request.POST.get('date_end')
+        if date_end == '':
+            article = Article.objects.create(description=description, status=status)
+        else:
+            article = Article.objects.create(description=description, status=status, date_end=date_end)
 
-        article = Article.objects.create(description=description, status=status, date_end=date_end)
-
-        print(date_end)
         context = {
             'article': article
         }

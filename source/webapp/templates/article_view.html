@@ -9,7 +9,9 @@
     <h1>Article:</h1>
     <h2>{{ article.description }}</h2>
     <p>{{ article.status }}</p>
-    <p>{{ article.date_end }}</p>
+     {% if article.date_end is not None %}
+        <p>{{ article.date_end }}</p>
+    {% endif %}
 
 </body>
 </html>
