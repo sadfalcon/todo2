@@ -12,6 +12,8 @@
 <p><a href="/articles/add/" class="button7">Добавить</a></p>
 {% for article in articles %}
     <h2>{{ article.description }}</h2>
+    <h3>{{ article.status }}</h3>
+    <h3>{{ article.date_end }}</h3>
     <hr>
 {% endfor %}
 </div>

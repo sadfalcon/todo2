@@ -6,7 +6,7 @@ status_choices = [('new', 'Новая'), ('in_progress', 'В процессе'),
 class Article(models.Model):
     description = models.CharField(max_length=3000, null=False, blank=False, verbose_name='Описание')
     status = models.CharField(max_length=3000, null=False, blank=False, verbose_name='Статус', default='new' ,choices=status_choices)
-    date_end = models.DateField(verbose_name='Дата выполнения')
+    date_end = models.DateField(null=True, blank=True, default = None, verbose_name='Дата выполнения')
 
 
     def __str__(self):
