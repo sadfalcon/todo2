@@ -25,7 +25,10 @@ def article_create_view(request):
         context = {
             'article': article
         }
-        return render(request, 'article_view.html', context)
+        url = reverse('article_view', kwargs={'pk': article.pk})
+        return HttpResponseRedirect(url)
+    else:
+        HttpResponseNotAllowed(permitted_methods=['GET','POST'])
 
 
 def article_view(request, pk):

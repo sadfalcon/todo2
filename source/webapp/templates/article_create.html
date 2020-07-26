@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>Create task</h1>
-<p><a href="/">На главную</a></p>
-<form action="/articles/add/" method="post">
+<p><a href="{% url 'index' %}">На главную</a></p>
+<form action="{% url 'article_create' %}" method="post">
     {% csrf_token %}
     <label>Description:</label><br/>
     <textarea name="description" required ></textarea><br/>

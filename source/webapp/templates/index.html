@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h1>To-Do List</h1>
-<p><a href="/articles/add/" class="button7">Добавить</a></p>
+<p><a href="{% url 'article_create' %}" class="button7">Добавить</a></p>
 {% for article in articles %}
     <h2>{{ article.description }}</h2>
     <h3>{{ article.status }}</h3>
