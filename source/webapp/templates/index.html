@@ -16,6 +16,7 @@
     {% if article.date_end is not None %}
         <h3>{{ article.date_end }}</h3>
     {% endif %}
+    <p><a href="{% url 'article_view' article.pk %}">Подробнее...</a></p>
     <hr>
 {% endfor %}
 </div>

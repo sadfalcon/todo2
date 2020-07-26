@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from webapp.models import Article
+from django.http import HttpResponseNotAllowed
 # Create your views here.
 def index_view(request):
     articles = Article.objects.all()
@@ -26,8 +28,8 @@ def article_create_view(request):
         return render(request, 'article_view.html', context)
 
 
-def article_view(request):
-    article_id = request.GET.get('pk')
-    article = Article.objects.get(pk=article_id)
+def article_view(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    article = Article.objects.get(pk=pk)
     context = {'article': article}
     return render(request, 'article_view.html', context)
