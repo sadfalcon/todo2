@@ -15,18 +15,18 @@ def article_create_view(request):
         return render(request, 'article_create.html')
     elif request.method == 'POST':
         description = request.POST.get('description')
+        full_description = request.POST.get('full_description')
         status = request.POST.get('status')
         date_end = request.POST.get('date_end')
         if date_end == '':
-            article = Article.objects.create(description=description, status=status)
+            article = Article.objects.create(description=description, status=status, full_description=full_description)
         else:
-            article = Article.objects.create(description=description, status=status, date_end=date_end)
+            article = Article.objects.create(description=description, status=status, date_end=date_end, full_description=full_description)
 
         context = {
             'article': article
         }
-        url = reverse('article_view', kwargs={'pk': article.pk})
-        return HttpResponseRedirect(url)
+        return redirect('article_view', pk=article.pk)
     else:
         HttpResponseNotAllowed(permitted_methods=['GET','POST'])
 

@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Create{% endblock %}
+
+{% block content %}
 <h1>Create task</h1>
-<p><a href="{% url 'index' %}">На главную</a></p>
 <form action="{% url 'article_create' %}" method="post">
     {% csrf_token %}
     <label>Description:</label><br/>
     <textarea name="description" required ></textarea><br/>
+    <br/>
+    <label>Full description:</label><br/>
+    <textarea name="full_description"></textarea><br/>
     <br/>
     <label>Status:</label><br/>
 <select  name="status">
@@ -23,6 +22,6 @@
 <input type="text" name="date_end">
     <input type="submit" value="Send"/>
 </form>
-</body>
-</html>
+{% endblock %}
+
 
