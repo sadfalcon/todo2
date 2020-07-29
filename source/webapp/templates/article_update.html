@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Update{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'article_view' article.pk %}">Отмена</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1>Update Article</h1>
+
+    <form action="{% url "article_update" article.pk %}" method="post">
+        {% csrf_token %}
+        <label>Description:</label><br/>
+    <textarea name="description" required>{{ article.description }} </textarea><br/>
+    <br/>
+    {% if errors.description %}<p class="error">{{ errors.description }}</p>{% endif %}
+        <label>Full description:</label><br/>
+    <textarea name="full_description" >{{ article.full_description }}</textarea><br/>
+    <br/>
+            <label for="id-status">Status:</label><br/>
+        <select name="status" id="id-status">
+            {% for value, label in status_choices %}
+                <option value="{{ value }}"
+                        {% if value == article.status %}selected{% endif %}>
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select><br/>
+
+    <label>Date end:</label><br/>
+    <input type="text" name="date_end" value="{{ article.date_end }}">
+        <br/>
+        <input type="submit" value="Send"/>
+    </form>
+{% endblock %}

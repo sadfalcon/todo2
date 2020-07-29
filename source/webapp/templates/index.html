@@ -9,7 +9,9 @@
     {% if article.date_end is not None %}
         <h3>{{ article.date_end }}</h3>
     {% endif %}
-    <p><a href="{% url 'article_view' article.pk %}">Подробнее...</a></p>
+    <p><a href="{% url 'article_view' article.pk %}">More...</a></p>
+    <p><a href="{% url 'article_update' article.pk %}">Edit</a></p>
+    <p><a href="{% url 'article_delete' article.pk %}">Delete</a></p>
     <hr>
 {% endfor %}
 {% endblock %}

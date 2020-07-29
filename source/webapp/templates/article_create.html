@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
+
 {% block title %}Create{% endblock %}
 
 {% block content %}
-<h1>Create task</h1>
-<form action="{% url 'article_create' %}" method="post">
-    {% csrf_token %}
-    <label>Description:</label><br/>
-    <textarea name="description" required ></textarea><br/>
-    <br/>
-    <label>Full description:</label><br/>
-    <textarea name="full_description"></textarea><br/>
-    <br/>
-    <label>Status:</label><br/>
-<select  name="status">
-    <option disabled>Выберите</option>
-    <option value="In_progress">В процессе</option>
-    <option selected value="New">Новая</option>
-     <option value="Done">Сделано</option>
-   </select><br/><br/>
-    <label>Date end:</label><br/>
-<input type="text" name="date_end">
-    <input type="submit" value="Send"/>
-</form>
+    <h1>Create Article</h1>
+
+    <form action="{% url "article_create" %}" method="post">
+        {% csrf_token %}
+
+{#        {% for field in form %}#}
+{#            {% include 'partial/form_field.html' %}#}
+{#        {% endfor %}#}
+
+{#        {{ form.as_p }}#}
+{#        {{ form.as_table }}#}
+
+        {% include 'partial/form_field.html' with field=form.description %}
+        {% include 'partial/form_field.html' with field=form.full_description %}
+        {% include 'partial/form_field.html' with field=form.status %}
+        {% include 'partial/form_field.html' with field=form.date_end %}
+
+        <br/>
+        <input type="submit" value="Send"/>
+    </form>
 {% endblock %}
 
 
