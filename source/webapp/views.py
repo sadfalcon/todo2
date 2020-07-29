@@ -49,11 +49,7 @@ def article_update_view(request, pk):
         if not article.description:
             errors['description'] = 'This field is required'
         article.full_description = request.POST.get('full_description')
-        if not article.full_description:
-            errors['full_description'] = 'This field is required'
         article.date_end = request.POST.get('date_end')
-        if not article.date_end:
-            errors['date_end'] = 'This field is required'
         article.status = request.POST.get('status')
 
         if errors:
