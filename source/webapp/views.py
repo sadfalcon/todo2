@@ -4,6 +4,7 @@ from webapp.models import Article, status_choices
 from webapp.forms import ArticleForm
 from django.http import HttpResponseNotAllowed
 # Create your views here.
+
 def index_view(request):
     articles = Article.objects.all()
     context = {
@@ -13,6 +14,7 @@ def index_view(request):
 
 def article_create_view(request):
     if request.method == 'GET':
+        form = ArticleForm()
         return render(request, 'article_create.html', context={'form': ArticleForm})
     elif request.method == 'POST':
         form = ArticleForm(data=request.POST)
@@ -42,22 +44,24 @@ def article_view(request, pk):
 def article_update_view(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'GET':
-        return render(request, 'article_update.html', context={'article': article,'status_choices': status_choices,})
+        form = ArticleForm(initial={
+                                    'description': article.description,
+                                    'full_description': article.full_description,
+                                    'date_end': article.date_end,
+                                    'status': article.status})
+        return render(request, 'article_update.html', context={'article': article,'status_choices': status_choices, 'article': article})
     elif request.method == 'POST':
-        errors = {}
-        article.description = request.POST.get('description')
-        if not article.description:
-            errors['description'] = 'This field is required'
-        article.full_description = request.POST.get('full_description')
-        article.date_end = request.POST.get('date_end')
-        article.status = request.POST.get('status')
+        form = ArticleForm(data=request.POST)
+        if form.is_valid():
+            # article = Article.objects.create(**form.cleaned_data)
+            article = Article.objects.create(
+                description=form.cleaned_data['description'],
+                full_description=form.cleaned_data['full_description'],
+                status=form.cleaned_data['status'],
+                date_end=form.cleaned_data['date_end']
+            )
 
-        if errors:
-            return render(request, 'article_update.html', context={
-                'article': article,
-                'errors': errors
-            })
-        article.save()
+            return redirect('article_view', pk=article.pk)
         return redirect('article_view', pk=article.pk)
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])

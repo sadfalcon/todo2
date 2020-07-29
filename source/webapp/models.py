@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime, date
 
 # Create your models here.
 status_choices = [('new', 'Новая'), ('in_progress', 'В процессе'),  ('done', 'Сделано')]
