@@ -1,0 +1,128 @@
+[
+{
+  "model": "webapp.task",
+  "pk": 1,
+  "fields": {
+    "summary": "test_1",
+    "description": "test test",
+    "status": 1,
+    "types": 1,
+    "created_at": "2020-08-04T19:49:05.397Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 2,
+  "fields": {
+    "summary": "test_2",
+    "description": "test test",
+    "status": 2,
+    "types": 2,
+    "created_at": "2020-08-04T21:05:37.976Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 3,
+  "fields": {
+    "summary": "test_3",
+    "description": "test test",
+    "status": 3,
+    "types": 3,
+    "created_at": "2020-08-04T21:06:24.444Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 4,
+  "fields": {
+    "summary": "test_4",
+    "description": "test test",
+    "status": 1,
+    "types": 2,
+    "created_at": "2020-08-04T21:07:25.770Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 5,
+  "fields": {
+    "summary": "test_5",
+    "description": "",
+    "status": 3,
+    "types": 1,
+    "created_at": "2020-08-04T21:07:52.872Z"
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 6,
+  "fields": {
+    "summary": "test_6",
+    "description": "test test",
+    "status": 2,
+    "types": 2,
+    "created_at": "2020-08-04T21:09:06.688Z"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 1,
+  "fields": {
+    "name": "in_progress"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 2,
+  "fields": {
+    "name": "new"
+  }
+},
+{
+  "model": "webapp.status",
+  "pk": 3,
+  "fields": {
+    "name": "done"
+  }
+},
+{
+  "model": "webapp.types",
+  "pk": 1,
+  "fields": {
+    "name": "bug"
+  }
+},
+{
+  "model": "webapp.types",
+  "pk": 2,
+  "fields": {
+    "name": "enhancement"
+  }
+},
+{
+  "model": "webapp.types",
+  "pk": 3,
+  "fields": {
+    "name": "task"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$SJr38TsPN96E$XxrPODLl5v/t/zctVbhsGqFlQnZIUr1Y7Wv57Yau/94=",
+    "last_login": "2020-08-04T19:47:49.345Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-07-21T16:07:21.866Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
