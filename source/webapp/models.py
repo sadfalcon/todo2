@@ -27,6 +27,8 @@ class Task(models.Model):
 class Status(models.Model):
     name = models.CharField(max_length=15, choices=STATUS_CHOICES, default='new', verbose_name='Модерация')
 
+    def __str__(self):
+        return "{}. {}".format(self.pk, self.name)
 
     class Meta:
         verbose_name = 'Статус'
@@ -35,6 +37,9 @@ class Status(models.Model):
 
 class Types(models.Model):
     name = models.CharField(max_length=15, choices=TYPE_CHOICES, default='new', verbose_name='Модерация')
+
+    def __str__(self):
+        return "{}. {}".format(self.pk, self.name)
 
     class Meta:
         verbose_name = 'Тип'

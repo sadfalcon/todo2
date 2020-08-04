@@ -1,4 +1,13 @@
 from django.contrib import admin
-from webapp.models import Article    # импортируем модель
+from webapp.models import Task, Status, Types   # импортируем модель
 
-admin.site.register(Article)
+class TaskAdmin(admin.ModelAdmin):
+    list_filter = ('status', 'types')
+    list_display = ('pk', 'summary', 'description', 'status', 'types')
+    list_display_links = ('pk', 'summary')
+    search_fields = ('summary',)
+
+
+admin.site.register(Task, TaskAdmin)
+admin.site.register(Status)
+admin.site.register(Types)

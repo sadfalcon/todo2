@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from webapp.models import Article, status_choices
-from webapp.forms import ArticleForm
+#from webapp.models import Article, status_choices
+#from webapp.forms import ArticleForm
 from django.http import HttpResponseNotAllowed
 # Create your views here.
 
