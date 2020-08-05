@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}View{% endblock %}
+{% block menu %}
+<li><a href="{% url 'task_update' task.pk %}">Update</a></li>
+    <li><a href="{% url 'task_delete' task.pk %}">Delete</a></li>
+{% endblock %}
+{% block content %}
+    <h1>Task:</h1>
+    <h2>{{ task.summary }}</h2>
+    <h2>{{ task.description }}</h2>
+    <p>{{ task.status }}</p>
+    <p>{{ task.types }}</p>
+     {% if task.created_at is not None %}
+        <p>{{ task.created_at }}</p>
+    {% endif %}
+{% endblock %}
+
