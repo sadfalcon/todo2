@@ -3,7 +3,7 @@ from webapp.models import Task, Status, Types   # импортируем мод�
 
 class TaskAdmin(admin.ModelAdmin):
     list_filter = ('status', 'types')
-    list_display = ('pk', 'summary', 'description', 'status', 'types')
+    list_display = ('pk', 'summary', 'description', 'status')
     list_display_links = ('pk', 'summary')
     search_fields = ('summary',)
 
