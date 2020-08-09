@@ -3,8 +3,9 @@ from django.urls import reverse
 from webapp.models import Task, Status, Types, TYPE_CHOICES, STATUS_CHOICES
 from webapp.forms import TaskForm, BROWSER_DATETIME_FORMAT
 from django.http import HttpResponseNotAllowed
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, FormView
 from django.utils.timezone import make_naive
+from .base_views import FormView as CustomFormView
 # Create your views here.
 
 
@@ -19,28 +20,24 @@ class IndexView(TemplateView):
         }
         return context
 
+class TaskCreateView(CustomFormView):
+    template_name = 'task_create.html'
+    form_class = TaskForm
 
-class TaskCreateView(View):
-    def get(self, request):
-        return render(request, 'task_create.html', context={
-            'form': TaskForm()
-        })
-    def post(self, request):
-        form = TaskForm(data=request.POST)
-        if form.is_valid():
-            # article = Article.objects.create(**form.cleaned_data)
-            task = Task.objects.create(
-                summary=form.cleaned_data['summary'],
-                description=form.cleaned_data['description'],
-                status=form.cleaned_data['status'],
-                types=form.cleaned_data['types'],
-                created_at=form.cleaned_data['created_at']
-            )
-            return redirect('task_view', pk=task.pk)
-        else:
-            return render(request, 'task_create.html', context={
-                'form': form
-            })
+    def form_valid(self, form):
+        data = {}
+        #tags = form.cleaned_data.pop('tags')
+        for key, value in form.cleaned_data.items():
+            if value is not None:
+                data[key] = value
+        self.task = Task.objects.create(**data)
+        #self.article.tags.set(tags)
+        return super().form_valid(form)
+
+    def get_redirect_url(self):
+        return reverse('task_view', kwargs={'pk': self.task.pk})
+
+
 
 
 class TaskView(TemplateView):
@@ -52,40 +49,45 @@ class TaskView(TemplateView):
         context = {'task': task}
         return context
 
-class TaskUpdateView(TemplateView):
+
+class TaskUpdateView(FormView):
     template_name = 'task_update.html'
+    form_class = TaskForm
+
+    def dispatch(self, request, *args, **kwargs):
+        self.task = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pk = self.kwargs.get('pk')
-        task = get_object_or_404(Task, pk=pk)
-        form = TaskForm(initial={'summary': task.description,
-                                        'description': task.description,
-                                        'status': task.status,
-                                        'types': task.types,
-                                        'created_at': make_naive(task.created_at).strftime(BROWSER_DATETIME_FORMAT)})
-        context['task'] = task
-        context['form'] = form
+        context['task'] = self.task
         return context
 
-    def post(self, request, *args, **kwargs):
+    def get_initial(self):
+        initial = {}
+        for key in 'summary', 'description', 'status', 'types':
+            initial[key] = getattr(self.task, key)
+        initial['created_at'] = make_naive(self.task.created_at)\
+            .strftime(BROWSER_DATETIME_FORMAT)
+        #initial['tags'] = self.article.tags.all()
+        return initial
+
+    def form_valid(self, form):
+        #tags = form.cleaned_data.pop('tags')
+        for key, value in form.cleaned_data.items():
+            if value is not None:
+                setattr(self.task, key, value)
+        self.task.save()
+        #self.article.tags.set(tags)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('task_view', kwargs={'pk': self.task.pk})
+
+    def get_object(self):
         pk = self.kwargs.get('pk')
-        task = get_object_or_404(Task, pk=pk)
-        form = TaskForm(data=request.POST)
-        if form.is_valid():
-            # article = Article.objects.create(**form.cleaned_data)
-            task.summary = form.cleaned_data['summary']
-            task.description = form.cleaned_data['description']
-            task.status = form.cleaned_data['status']
-            task.types = form.cleaned_data['types']
-            task.created_at = form.cleaned_data['created_at']
-            task.save()
-            return redirect('task_view', pk=task.pk)
-        else:
-            return self.render_to_response({
-                'task': task,
-                'form': form
-            })
+        return get_object_or_404(Task, pk=pk)
+
 
 class TaskDeleteView(TemplateView):
     template_name = 'delete.html'
