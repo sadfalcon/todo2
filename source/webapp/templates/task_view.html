@@ -8,8 +8,8 @@
     <h1>Task:</h1>
     <h2>{{ task.summary }}</h2>
     <h2>{{ task.description }}</h2>
-    <p>{{ task.status }}</p>
-    <p>{{ task.types }}</p>
+    <p>Status: {{ task.status }}</p>
+    <p>Types: {% for type in task.types.all %} {{ type.name }} {% if not forloop.last %}, {% endif %}{% endfor %}</p>
      {% if task.created_at is not None %}
         <p>{{ task.created_at }}</p>
     {% endif %}

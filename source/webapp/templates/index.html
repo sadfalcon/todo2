@@ -5,8 +5,8 @@
     <h1>To-Do List</h1>
 {% for task in tasks %}
     <h2>{{ task.summary }}</h2>
-    <h3>{{ task.status }}</h3>
-    <h3>{{ task.types }}</h3>
+    <h3>Status: {{ task.status }}</h3>
+    <h3>Types: {% for type in task.types.all %} {{ type.name }} {% endfor %}</h3>
     {% if task.created_at is not None %}
         <h3>{{ task.created_at }}</h3>
     {% endif %}
