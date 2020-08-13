@@ -1,12 +1,46 @@
 from django import forms
-from .models import STATUS_CHOICES, TYPE_CHOICES, Status, Types
+from django.core.exceptions import ValidationError
+from django.core.validators import BaseValidator
+from django.utils.deconstruct import deconstructible
+from .models import Task
+#default_types = TYPE_CHOICES[0][0]
+#default_status = STATUS_CHOICES[0][0]
+BROWSER_DATETIME_FORMAT = '%d.%m.%Y %H:%M'
 
-BROWSER_DATETIME_FORMAT = '%Y-%m-%dT%H:%M'
-default_types = TYPE_CHOICES[0][0]
-default_status = STATUS_CHOICES[0][0]
+@deconstructible
+class MinLengthValidator(BaseValidator):
+    message = 'Value "%(value)s" has length of %(show_value)d! It should be at least %(limit_value)d symbols long!'
+    code = 'too_short'
 
-class TaskForm(forms.Form):
-    summary = forms.CharField(max_length=3000, required=True, label='Описание')
-    description = forms.CharField(max_length=3000, label='Полное описание', required=False, widget=forms.Textarea)
-    status = forms.ModelChoiceField(queryset=Status.objects.all(), initial=default_status, label='Статус')
-    types = forms.ModelMultipleChoiceField(queryset=Types.objects.all(), initial=default_types, label='Тип')
+    def compare(self, value, limit):
+        return value < limit
+
+    def clean(self, value):
+        return len(value)
+
+@deconstructible
+class MaxLengthValidator(BaseValidator):
+    message = 'Ensure this value has at most %(limit_value)d character (it has %(show_value)d).'
+    code = 'max_length'
+
+    def compare(self, a, b):
+        return a > b
+
+    def clean(self, x):
+        return len(x)
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['summary', 'description', 'status', 'types']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        errors = []
+        summary = cleaned_data.get('summary')
+        description = cleaned_data.get('description')
+        if summary and description and summary == description:
+            errors.append(ValidationError("Description of the task should not duplicate it's summary!"))
+        if errors:
+            raise ValidationError(errors)
+        return cleaned_data

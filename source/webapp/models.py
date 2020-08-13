@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime, date
+from django.core.validators import MinLengthValidator, MaxLengthValidator
+
 
 # Create your models here.
 STATUS_CHOICES = [('new', 'Новая'), ('in_progress', 'В процессе'),  ('done', 'Выполнено')]
@@ -7,7 +9,7 @@ TYPE_CHOICES = [('task', 'Задача'), ('bug', 'Ошибка'),  ('enhancemen
 
 
 class Task(models.Model):
-    summary = models.CharField(max_length=3000, null=False, blank=False, verbose_name='Описание')
+    summary = models.CharField(max_length=3000, null=False, blank=False, verbose_name='Описание', validators=[MinLengthValidator(10), MaxLengthValidator(3000)])
     description = models.TextField(max_length=3000, null=True, blank=True, default=None, verbose_name='Полное описание')
     status = models.ForeignKey('webapp.Status', related_name='tasks',
                                 on_delete=models.CASCADE, verbose_name='Статус')

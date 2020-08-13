@@ -8,17 +8,19 @@ from django.utils.timezone import make_naive
 from .base_views import FormView as CustomFormView
 # Create your views here.
 
+class IndexView(View):
+    def get(self, request):
+        data = Task.objects.all()
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        pk = self.kwargs.get('pk')
-        tasks = Task.objects.all()
-        context = {
-            'tasks': tasks
-        }
-        return context
+        # http://localhost:8000/?search=ygjkjhg
+        search = request.GET.get('search')
+        if search:
+            data = data.filter(summary__icontains=search)
+
+        return render(request, 'index.html', context={
+            'tasks': data
+        })
+
 
 class TaskCreateView(CustomFormView):
     template_name = 'task_create.html'
