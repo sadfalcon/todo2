@@ -64,3 +64,7 @@ body {
     margin-top: 2px;
 
 }
+.search {
+    display: inline-block;
+    float: right;
+}

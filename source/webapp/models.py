@@ -16,6 +16,7 @@ class Task(models.Model):
     types = models.ManyToManyField('webapp.Types', related_name='tasks', blank=True, verbose_name='Тип')
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
 
     def __str__(self):
