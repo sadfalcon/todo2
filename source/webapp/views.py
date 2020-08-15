@@ -27,13 +27,7 @@ class TaskCreateView(CustomFormView):
     form_class = TaskForm
 
     def form_valid(self, form):
-        data = {}
-        types = form.cleaned_data.pop('types')
-        for key, value in form.cleaned_data.items():
-            if value is not None:
-                data[key] = value
-        self.task = Task.objects.create(**data)
-        self.task.types.set(types)
+        self.task = form.save()
         return super().form_valid(form)
 
     def get_redirect_url(self):
@@ -65,22 +59,13 @@ class TaskUpdateView(FormView):
         context['task'] = self.task
         return context
 
-    def get_initial(self):
-        initial = {}
-        for key in 'summary', 'description', 'status', 'types':
-            initial[key] = getattr(self.task, key)
-        initial['created_at'] = make_naive(self.task.created_at)\
-            .strftime(BROWSER_DATETIME_FORMAT)
-        initial['types'] = self.task.types.all()
-        return initial
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = self.task
+        return kwargs
 
     def form_valid(self, form):
-        types = form.cleaned_data.pop('types')
-        for key, value in form.cleaned_data.items():
-            if value is not None:
-                setattr(self.task, key, value)
-        self.task.save()
-        self.task.types.set(types)
+        self.task = form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
