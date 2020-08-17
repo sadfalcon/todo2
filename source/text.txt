@@ -1,0 +1,5 @@
+Task.objects.filter(Q(status__name='done')&Q(updated_at__date__gte=(datetime.now()-timedelta(days=30))))
+
+Task.objects.filter(Q(status__name__in=['done','new']) & Q(types__name__in=['task','bug']))
+
+Task.objects.filter((Q(summary__icontains='bug')|Q(types__name='bug'))&Q(status__name__in=['new', 'in_progress']))
