@@ -23,8 +23,8 @@
     {% if task.created_at is not None %}
         <h3>{{ task.created_at }}</h3>
     {% endif %}
-    <p><a href="{% url 'task_update' task.pk %}">Edit</a></p>
-    <p><a href="{% url 'task_delete' task.pk %}">Delete</a></p>
+    <div class="text"><p><a href="{% url 'task_update' task.pk %}" class="button7">Edit</a></p></div>
+   <div class="text"><p><a href="{% url 'task_delete' task.pk %}" class="button8">Delete</a></p></div>
     <hr>
 {% endfor %}
     {% if is_paginated %}
