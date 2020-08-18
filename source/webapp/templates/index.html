@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}Index{% endblock %}
 
+{% block search %}
+    <div class="search">
+        <form action="{% url 'index' %}" method="GET">
+            {{ form.search }}
+            <input type="submit" value="Найти">
+        </form>
+    </div>
+{% endblock %}
+
 {% block content %}
     <h1>To-Do List</h1>
+
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% for task in tasks %}
     <h2><a href="{% url "task_view" task.pk %}">{{ task.summary }}</a></h2>
     <h3>Status: {{ task.status }}</h3>
@@ -14,4 +27,7 @@
     <p><a href="{% url 'task_delete' task.pk %}">Delete</a></p>
     <hr>
 {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}

@@ -7,7 +7,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %} My site{% endblock %}</title>
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
     <nav class="navbar">
@@ -17,13 +19,16 @@
            <li><a href="{% url 'task_create' %}">Add Task</a></li>
            {% block menu %}{% endblock %}
        </ul>
-   <div class="search">
-                <form action="{% url 'index' %}" method="GET">
-                    <input type="text" name="search">
-                    <input type="submit" value="Найти">
-                </form>
-            </div>
-   </div>
+
+{#            <div class="search-form">#}
+{#                <form action="{% url 'index' %}" method="GET">#}
+{#                    <input type="text" name="search">#}
+{#                    <input type="submit" value="Найти">#}
+{#                </form>#}
+{#            </div>#}
+            {% block search %}
+            {% endblock %}
+        </div>
 </nav>
 <div class="container">
     {% block content %}
