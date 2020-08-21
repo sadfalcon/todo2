@@ -3,13 +3,13 @@ from webapp.models import Task, Status, Types, Projects  # импортируе�
 
 class TaskAdmin(admin.ModelAdmin):
     list_filter = ('status', 'types')
-    list_display = ('pk', 'summary', 'description', 'status')
+    list_display = ('pk', 'summary', 'description', 'status', 'project')
     list_display_links = ('pk', 'summary')
     search_fields = ('summary',)
 
 class ProjectsAdmin(admin.ModelAdmin):
     list_filter = ('name',)
-    list_display = ('pk', 'name', 'description',)
+    list_display = ('pk', 'name', 'description')
     list_display_links = ('pk', 'name')
     search_fields = ('name',)
 

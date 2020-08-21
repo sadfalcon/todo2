@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime, date
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from django.utils import timezone
 
 
 # Create your models here.
@@ -17,6 +18,8 @@ class Task(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
+    project = models.ForeignKey('webapp.Projects', related_name='tasks',
+                                on_delete=models.CASCADE, verbose_name='Проект')
 
 
     def __str__(self):
