@@ -1,3 +1,8 @@
+.container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
+}
 
 a.button7 {
   font-weight: 700;
@@ -144,4 +149,11 @@ a.button8:active {
 .text {
     margin-bottom: 30px;
     display: inline-block;
+}
+.box {
+    box-sizing: border-box;
+    border: solid 1px gray;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
 }

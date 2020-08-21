@@ -10,7 +10,7 @@ from django.db.models import Q
 # Create your views here.
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'task/index.html'
     context_object_name = 'tasks'
     paginate_by = 5
     paginate_orphans = 0
@@ -54,7 +54,7 @@ class TaskCreateView(CustomFormView):
 
 
 class TaskView(TemplateView):
-    template_name = 'task_view.html'
+    template_name = 'task/task_view.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
@@ -64,7 +64,7 @@ class TaskView(TemplateView):
 
 
 class TaskUpdateView(FormView):
-    template_name = 'task_update.html'
+    template_name = 'task/task_update.html'
     form_class = TaskForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -94,7 +94,7 @@ class TaskUpdateView(FormView):
 
 
 class TaskDeleteView(TemplateView):
-    template_name = 'delete.html'
+    template_name = 'task/delete.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
