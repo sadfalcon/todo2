@@ -15,8 +15,8 @@
     <nav class="navbar">
    <div class="container">
        <ul class="menu">
-           <li><a href="{% url 'index' %}">Index</a></li>
-           <li><a href="{% url 'task_create' %}">Add Task</a></li>
+           <li><a href="{% url 'projects_index' %}">Index</a></li>
+           <li><a href="{% url 'project_create' %}">Add Project</a></li>
            {% block menu %}{% endblock %}
        </ul>
 
@@ -26,8 +26,8 @@
 {#                    <input type="submit" value="Найти">#}
 {#                </form>#}
 {#            </div>#}
-            {% block search %}
-            {% endblock %}
+           {% comment %} {% block search %}
+            {% endblock %}{% endcomment %}
         </div>
 </nav>
 <div class="container">

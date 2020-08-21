@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}View{% endblock %}
+
+{% comment %}{% block menu %}
+    <li><a href="{% url 'project_task_add' project.pk %}">Add Task</a></li>
+{% endblock %}{% endcomment %}
+
 {% block content %}
     <h1>Project:</h1>
     <h2>Name: {{ projects.name }}</h2>
     <h3>Description: {{ projects.description }}</h3>
      {% if projects.start_date is not None %}
-        <h3>Date start: {{ projects.start_date }}</h3>
+        <h3>Start date: {{ projects.start_date }}</h3>
     {% endif %}
-    {% if projects.start_date is not None %}
+    {% if projects.end_date is not None %}
         <h3>Date end: {{ projects.end_date }}</h3>
     {% endif %}
+
     <h3>Tasks:</h3>
 <div class="box">
 {% for task in tasks %}
@@ -21,6 +27,7 @@
     {% endif %}
     <div class="text"><p><a href="{% url 'task_update' task.pk %}" class="button7">Edit</a></p></div>
    <div class="text"><p><a href="{% url 'task_delete' task.pk %}" class="button8">Delete</a></p></div>
+
     <hr>
 {% endfor %}
 </div>

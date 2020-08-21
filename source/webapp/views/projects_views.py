@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from webapp.models import Task, Status, Types, TYPE_CHOICES, STATUS_CHOICES, Projects
-from webapp.forms import TaskForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
+from webapp.forms import TaskForm, ProjectForm
 from django.http import HttpResponseNotAllowed
-from django.views.generic import View, TemplateView, FormView, ListView, DetailView
-from .base_views import FormView as CustomFormView
+from django.views.generic import CreateView, ListView, DetailView
+
 from django.db.models import Q
 
 
@@ -27,3 +27,11 @@ class ProjectView(DetailView):
         tasks = project.tasks.all()
         context['tasks'] = tasks
         return context
+
+class ProjectCreateView(CreateView):
+    template_name = 'project/project_create.html'
+    form_class = ProjectForm
+    model = Projects
+
+    def get_success_url(self):
+        return reverse('project_view', kwargs={'pk': self.object.pk})

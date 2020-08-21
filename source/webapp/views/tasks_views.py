@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from webapp.models import Task, Status, Types, TYPE_CHOICES, STATUS_CHOICES
+from webapp.models import Task, Status, Types, TYPE_CHOICES, STATUS_CHOICES, Projects
 from webapp.forms import TaskForm, BROWSER_DATETIME_FORMAT, SimpleSearchForm
 from django.http import HttpResponseNotAllowed
-from django.views.generic import View, TemplateView, FormView, ListView
+from django.views.generic import View, TemplateView, FormView, ListView, CreateView
 from django.utils.timezone import make_naive
 from .base_views import FormView as CustomFormView
 from django.db.models import Q
+
+
 # Create your views here.
 
 class IndexView(ListView):
@@ -26,8 +28,8 @@ class IndexView(ListView):
     def get_queryset(self):
         data = Task.objects.all()
 
-        #if not self.request.GET.get('is_admin', None):
-            #data = Task.objects.filter(status='moderated')
+        # if not self.request.GET.get('is_admin', None):
+        # data = Task.objects.filter(status='moderated')
 
         # http://localhost:8000/?search=ygjkjhg
         form = SimpleSearchForm(data=self.request.GET)
@@ -51,10 +53,9 @@ class TaskCreateView(CustomFormView):
         return reverse('task_view', kwargs={'pk': self.task.pk})
 
 
-
-
 class TaskView(TemplateView):
     template_name = 'task/task_view.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
@@ -108,3 +109,16 @@ class TaskDeleteView(TemplateView):
         task = get_object_or_404(Task, pk=pk)
         task.delete()
         return redirect('index')
+
+
+class ProjectTaskCreateView(CreateView):
+    model = Task
+    template_name = 'task/task_create2.html'
+    form_class = TaskForm
+
+    def form_valid(self, form):
+        project = get_object_or_404(Projects, pk=self.kwargs.get('pk'))
+        task = form.save(commit=False)
+        task.project = project
+        task.save()
+        return redirect('project_view', pk=project.pk)

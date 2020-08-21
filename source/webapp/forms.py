@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import BaseValidator
 from django.utils.deconstruct import deconstructible
-from .models import Task
+from .models import Task, Projects
 #default_types = TYPE_CHOICES[0][0]
 #default_status = STATUS_CHOICES[0][0]
 BROWSER_DATETIME_FORMAT = '%d.%m.%Y %H:%M'
@@ -47,3 +47,8 @@ class TaskForm(forms.ModelForm):
 
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="Найти")
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Projects
+        fields = ['name', 'description', 'start_date', 'end_date']
