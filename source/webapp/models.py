@@ -49,6 +49,19 @@ class Types(models.Model):
         verbose_name_plural = 'Типы'
 
 
+class Projects(models.Model):
+    start_date = models.DateField(verbose_name='Время создания')
+    end_date = models.DateField(null=True, blank=True, verbose_name='Время окончания')
+    name = models.CharField(max_length=300, null=False, blank=False, verbose_name='Название')
+    description = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Описание')
+
+    def __str__(self):
+        return "{}. {}".format(self.pk, self.name)
+
+
+    class Meta:
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
 
 
 
