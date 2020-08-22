@@ -17,6 +17,9 @@
     {% endif %}
 
     <h3>Tasks:</h3>
+    {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
 <div class="box">
 {% for task in tasks %}
     <h3><a href="{% url "task_view" task.pk %}">{{ task.summary }}</a></h3>
@@ -31,5 +34,8 @@
     <hr>
 {% endfor %}
 </div>
+    {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
 {% endblock %}
 
