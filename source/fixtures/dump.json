@@ -8,6 +8,7 @@
     "status": 1,
     "created_at": "2020-08-04T21:05:37.976Z",
     "updated_at": "2020-08-17T09:47:53.809Z",
+    "project": 1,
     "types": [
       1
     ]
@@ -18,10 +19,11 @@
   "pk": 3,
   "fields": {
     "summary": "test_33333333",
-    "description": "test test",
+    "description": "\u0430\u043f\u0440",
     "status": 3,
     "created_at": "2020-08-04T21:06:24.444Z",
-    "updated_at": "2020-08-15T16:34:08.368Z",
+    "updated_at": "2020-08-18T16:17:15.103Z",
+    "project": 1,
     "types": []
   }
 },
@@ -34,6 +36,7 @@
     "status": 1,
     "created_at": "2020-08-04T21:07:25.770Z",
     "updated_at": "2020-08-15T14:00:45.616Z",
+    "project": 1,
     "types": []
   }
 },
@@ -46,6 +49,7 @@
     "status": 3,
     "created_at": "2020-08-04T21:07:52.872Z",
     "updated_at": "2020-08-15T16:34:28.652Z",
+    "project": 1,
     "types": []
   }
 },
@@ -58,6 +62,7 @@
     "status": 2,
     "created_at": "2020-08-05T13:00:06.189Z",
     "updated_at": "2020-08-15T14:00:45.616Z",
+    "project": 1,
     "types": []
   }
 },
@@ -70,6 +75,7 @@
     "status": 1,
     "created_at": "2020-08-09T19:07:43.071Z",
     "updated_at": "2020-08-15T14:00:45.616Z",
+    "project": 1,
     "types": [
       2
     ]
@@ -84,6 +90,7 @@
     "status": 1,
     "created_at": "2020-08-10T09:07:25.085Z",
     "updated_at": "2020-08-15T14:00:45.616Z",
+    "project": 1,
     "types": [
       2
     ]
@@ -98,6 +105,7 @@
     "status": 3,
     "created_at": "2020-08-15T14:03:47.949Z",
     "updated_at": "2020-08-17T09:31:57.175Z",
+    "project": 1,
     "types": [
       4
     ]
@@ -108,10 +116,50 @@
   "pk": 15,
   "fields": {
     "summary": "12345678904",
-    "description": "",
+    "description": "vvhnnjkk,m",
     "status": 3,
     "created_at": "2020-08-15T14:05:52.792Z",
-    "updated_at": "2020-08-15T14:06:00.146Z",
+    "updated_at": "2020-08-18T15:11:31.068Z",
+    "project": 1,
+    "types": []
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 16,
+  "fields": {
+    "summary": "test test teeee",
+    "description": "vr",
+    "status": 1,
+    "created_at": "2020-08-22T08:50:55.280Z",
+    "updated_at": "2020-08-22T08:50:55.281Z",
+    "project": 1,
+    "types": []
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 17,
+  "fields": {
+    "summary": "123rvrbbngng",
+    "description": "vrvr",
+    "status": 1,
+    "created_at": "2020-08-22T08:54:40.968Z",
+    "updated_at": "2020-08-22T08:54:40.968Z",
+    "project": 6,
+    "types": []
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 18,
+  "fields": {
+    "summary": "\u0438\u0441\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u0431\u0430\u0433",
+    "description": "",
+    "status": 1,
+    "created_at": "2020-08-22T09:36:54.335Z",
+    "updated_at": "2020-08-22T09:36:54.335Z",
+    "project": 1,
     "types": []
   }
 },
@@ -165,11 +213,71 @@
   }
 },
 {
+  "model": "webapp.projects",
+  "pk": 1,
+  "fields": {
+    "start_date": "2020-08-21",
+    "end_date": null,
+    "name": "Improve",
+    "description": "improve all"
+  }
+},
+{
+  "model": "webapp.projects",
+  "pk": 2,
+  "fields": {
+    "start_date": "2020-08-21",
+    "end_date": "2020-08-24",
+    "name": "Improve",
+    "description": "improve improve"
+  }
+},
+{
+  "model": "webapp.projects",
+  "pk": 3,
+  "fields": {
+    "start_date": "2020-08-21",
+    "end_date": null,
+    "name": "Improve",
+    "description": "sgererb"
+  }
+},
+{
+  "model": "webapp.projects",
+  "pk": 4,
+  "fields": {
+    "start_date": "2020-08-21",
+    "end_date": null,
+    "name": "Improve",
+    "description": ";;"
+  }
+},
+{
+  "model": "webapp.projects",
+  "pk": 5,
+  "fields": {
+    "start_date": "2020-08-21",
+    "end_date": null,
+    "name": "Improve",
+    "description": "\u044d"
+  }
+},
+{
+  "model": "webapp.projects",
+  "pk": 6,
+  "fields": {
+    "start_date": "2020-08-21",
+    "end_date": "2020-08-24",
+    "name": "Improve",
+    "description": "fef"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$150000$SJr38TsPN96E$XxrPODLl5v/t/zctVbhsGqFlQnZIUr1Y7Wv57Yau/94=",
-    "last_login": "2020-08-04T19:47:49.345Z",
+    "last_login": "2020-08-21T09:24:11.673Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
