@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}View{% endblock %}
 
-{% comment %}{% block menu %}
-    <li><a href="{% url 'project_task_add' project.pk %}">Add Task</a></li>
-{% endblock %}{% endcomment %}
+{% block menu %}
+    <li><a href="{% url 'project_task_add' projects.pk %}">Add Task</a></li>
+{% endblock %}
 
 {% block content %}
     <h1>Project:</h1>
