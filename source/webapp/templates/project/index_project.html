@@ -11,6 +11,8 @@
     {% if project.start_date is not None %}
         <p>Date start:{{ project.start_date }}</p>
     {% endif %}
+    <p><a href="{% url 'project_update' project.pk %}">Update</a></p>
+    <p><a href="{% url 'project_delete' project.pk %}">Delete</a></p>
     <hr>
 {% endfor %}
 

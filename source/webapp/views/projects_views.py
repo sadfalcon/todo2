@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from webapp.models import Task, Status, Types, TYPE_CHOICES, STATUS_CHOICES, Projects
 from webapp.forms import TaskForm, ProjectForm
 from django.http import HttpResponseNotAllowed
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.core.paginator import Paginator
 from django.db.models import Q
 
@@ -51,3 +51,18 @@ class ProjectCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.pk})
+
+
+class ProjectUpdateView(UpdateView):
+    template_name = 'project/project_update.html'
+    form_class = ProjectForm
+    model = Projects
+
+    def get_success_url(self):
+        return reverse('project_view', kwargs={'pk': self.object.pk})
+
+
+class ProjectDeleteView(DeleteView):
+    template_name = 'project/project_delete.html'
+    model = Projects
+    success_url = reverse_lazy('projects_index')
